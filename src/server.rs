@@ -6,7 +6,7 @@ use websocket::{Server, Message, Sender, Receiver};
 use websocket::message::Type;
 
 fn main() {
-    let addr = "127.0.0.1:9001".to_string();
+    let addr = "0.0.0.0:31415".to_string();
 
     let server = Server::bind(&addr[..]).unwrap();
 

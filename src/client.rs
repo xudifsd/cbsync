@@ -14,10 +14,33 @@ use clipboard::ClipboardContext;
 use std::time::Duration;
 use std::thread;
 
+use std::io::prelude::*;
+use std::fs::File;
+use std::env;
+
+fn read_server_ip() -> String {
+    let default = "127.0.0.1".to_string();
+    match env::home_dir() {
+        None => default,
+        Some(p) => {
+            match File::open(p.join(".cbsyncrc")) {
+                Err(_) => default,
+                Ok(mut f) => {
+                    let mut s = String::new();
+                    match f.read_to_string(&mut s) {
+                        Err(_) => default,
+                        Ok(length) => s.trim().to_string()
+                    }
+                }
+            }
+        }
+    }
+}
+
 fn main() {
+    let ip = read_server_ip();
     let mut ctx = ClipboardContext::new().unwrap();
-    let url = "ws://127.0.0.1:9001".to_string();
-    let agent = "rust-websocket";
+    let url = format!("{}{}{}", "ws://", ip, ":31415");
 
     let ws_uri = Url::parse(&url[..]).unwrap();
     let request = Client::connect(ws_uri).unwrap();
