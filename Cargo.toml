@@ -1,0 +1,12 @@
+[package]
+name = "cbsync"
+version = "0.1.0"
+authors = ["Di Xu <xudifsd@gmail.com>"]
+
+[[bin]]
+name = "client"
+path = "src/client.rs"
+
+[dependencies]
+# https://github.com/aweinstock314/rust-clipboard
+clipboard = "*"
