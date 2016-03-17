@@ -7,6 +7,13 @@ authors = ["Di Xu <xudifsd@gmail.com>"]
 name = "client"
 path = "src/client.rs"
 
+[[bin]]
+name = "server"
+path = "src/server.rs"
+
 [dependencies]
 # https://github.com/aweinstock314/rust-clipboard
 clipboard = "*"
+# https://github.com/cyderize/rust-websocket
+websocket = "*"
+rustc-serialize = "0.3"
